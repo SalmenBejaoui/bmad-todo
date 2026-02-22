@@ -1,6 +1,6 @@
 # Story 1.4: Frontend Shell & Dependency Configuration
 
-Status: ready-for-dev
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -26,63 +26,63 @@ So that all visual and data-fetching foundations are in place for component deve
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Install frontend dependencies (AC: 1)
-  - [ ] Install Tailwind CSS V4: `npm install tailwindcss @tailwindcss/vite` (V4 uses Vite plugin, no `tailwind.config.js`)
-  - [ ] Install shadcn/ui dependencies: `npm install @radix-ui/react-dialog @radix-ui/react-checkbox @radix-ui/react-slot class-variance-authority clsx tailwind-merge lucide-react`
-  - [ ] Install TanStack Query V5: `npm install @tanstack/react-query`
-  - [ ] Install React Router v7: `npm install react-router`
-  - [ ] Install dev dependencies: `npm install -D vitest @vitejs/plugin-react @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom`
-  - [ ] Install Inter font: `npm install @fontsource/inter`
-  - [ ] Update `frontend/package.json` with all scripts: `dev`, `build`, `preview`, `test`
+- [x] Task 1: Install frontend dependencies (AC: 1)
+  - [x] Install Tailwind CSS V4: `npm install tailwindcss @tailwindcss/vite` (V4 uses Vite plugin, no `tailwind.config.js`)
+  - [x] Install shadcn/ui dependencies: `npm install @radix-ui/react-dialog @radix-ui/react-checkbox @radix-ui/react-slot class-variance-authority clsx tailwind-merge lucide-react`
+  - [x] Install TanStack Query V5: `npm install @tanstack/react-query`
+  - [x] Install React Router v7: `npm install react-router`
+  - [x] Install dev dependencies: `npm install -D vitest @vitejs/plugin-react @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom`
+  - [x] Install Inter font: `npm install @fontsource/inter`
+  - [x] Update `frontend/package.json` with all scripts: `dev`, `build`, `preview`, `test`
 
-- [ ] Task 2: Configure Vite for Tailwind V4 (AC: 1, 2)
-  - [ ] Create `frontend/vite.config.ts` with `@tailwindcss/vite` plugin AND `@vitejs/plugin-react`
-  - [ ] Create `frontend/tsconfig.json`, `frontend/tsconfig.app.json`, `frontend/tsconfig.node.json`
-  - [ ] Create `frontend/index.html` with root `<div id="root">` and `<script type="module" src="/src/main.tsx">`
+- [x] Task 2: Configure Vite for Tailwind V4 (AC: 1, 2)
+  - [x] Create `frontend/vite.config.ts` with `@tailwindcss/vite` plugin AND `@vitejs/plugin-react`
+  - [x] Create `frontend/tsconfig.json`, `frontend/tsconfig.app.json`, `frontend/tsconfig.node.json`
+  - [x] Create `frontend/index.html` with root `<div id="root">` and `<script type="module" src="/src/main.tsx">`
 
-- [ ] Task 3: Configure Tailwind V4 CSS with design tokens (AC: 2)
-  - [ ] Create `frontend/src/app.css` with `@import "tailwindcss"` (V4 syntax — NOT `@tailwind base/components/utilities`)
-  - [ ] Add `@theme {}` block with all 10 design tokens mapped to CSS custom properties (see Dev Notes for exact values)
-  - [ ] Import Inter font in `app.css` using `@import "@fontsource/inter"`
-  - [ ] Set `font-family: 'Inter', system-ui, sans-serif` as the default body font
+- [x] Task 3: Configure Tailwind V4 CSS with design tokens (AC: 2)
+  - [x] Create `frontend/src/app.css` with `@import "tailwindcss"` (V4 syntax — NOT `@tailwind base/components/utilities`)
+  - [x] Add `@theme {}` block with all 10 design tokens mapped to CSS custom properties (see Dev Notes for exact values)
+  - [x] Import Inter font in `app.css` using `@import "@fontsource/inter"`
+  - [x] Set `font-family: 'Inter', system-ui, sans-serif` as the default body font
 
-- [ ] Task 4: Create `src/lib/query-client.ts` (AC: 3)
-  - [ ] Create and export a configured `QueryClient` instance (singleton)
-  - [ ] Set `defaultOptions.queries.staleTime` to a reasonable value (e.g. `1000 * 60`)
-  - [ ] Set `defaultOptions.queries.retry` to `1`
+- [x] Task 4: Create `src/lib/query-client.ts` (AC: 3)
+  - [x] Create and export a configured `QueryClient` instance (singleton)
+  - [x] Set `defaultOptions.queries.staleTime` to a reasonable value (e.g. `1000 * 60`)
+  - [x] Set `defaultOptions.queries.retry` to `1`
 
-- [ ] Task 5: Create `src/lib/api-client.ts` (AC: 4)
-  - [ ] Read base URL from `import.meta.env.VITE_API_URL` — never hardcode `localhost:3000`
-  - [ ] Export typed `get`, `post`, `patch`, `del` functions that prepend base URL and parse JSON
-  - [ ] Throw a typed `ApiError` with `{ message, status, code? }` on non-2xx responses
-  - [ ] Export `ApiError` class/interface from this file
+- [x] Task 5: Create `src/lib/api-client.ts` (AC: 4)
+  - [x] Read base URL from `import.meta.env.VITE_API_URL` — never hardcode `localhost:3000`
+  - [x] Export typed `get`, `post`, `patch`, `del` functions that prepend base URL and parse JSON
+  - [x] Throw a typed `ApiError` with `{ message, status, code? }` on non-2xx responses
+  - [x] Export `ApiError` class/interface from this file
 
-- [ ] Task 6: Create `src/types/index.ts` (AC: 3)
-  - [ ] Export `Todo` interface with all 9 fields matching the Prisma `Todo` model: `id`, `title`, `description`, `completed`, `userId`, `createdAt`, `doneAt`, `updatedAt`, `deletedAt`
-  - [ ] All timestamp fields are `string | null` (ISO 8601 strings from API — never `Date` objects)
-  - [ ] Export `ApiError` interface matching what `api-client.ts` throws
+- [x] Task 6: Create `src/types/index.ts` (AC: 3)
+  - [x] Export `Todo` interface with all 9 fields matching the Prisma `Todo` model: `id`, `title`, `description`, `completed`, `userId`, `createdAt`, `doneAt`, `updatedAt`, `deletedAt`
+  - [x] All timestamp fields are `string | null` (ISO 8601 strings from API — never `Date` objects)
+  - [x] Export `ApiError` interface matching what `api-client.ts` throws
 
-- [ ] Task 7: Create `src/App.tsx` with route definitions (AC: 3, 6)
-  - [ ] Define two routes: `/` (task list) and `/todos/:id` (task list + detail modal)
-  - [ ] Use `createBrowserRouter` from `react-router` (v7 API)
-  - [ ] Both routes render the same `TaskList` placeholder component for now (full components in Epic 3)
-  - [ ] Export the router from `App.tsx` for use in `main.tsx`
+- [x] Task 7: Create `src/App.tsx` with route definitions (AC: 3, 6)
+  - [x] Define two routes: `/` (task list) and `/todos/:id` (task list + detail modal)
+  - [x] Use `createBrowserRouter` from `react-router` (v7 API)
+  - [x] Both routes render the same `TaskList` placeholder component for now (full components in Epic 3)
+  - [x] Export the router from `App.tsx` for use in `main.tsx`
 
-- [ ] Task 8: Create `src/main.tsx` entry point (AC: 3, 6)
-  - [ ] Import `queryClient` from `lib/query-client.ts`
-  - [ ] Wrap app in `<QueryClientProvider client={queryClient}>` from `@tanstack/react-query`
-  - [ ] Wrap app in `<RouterProvider router={router}>` from `react-router`
-  - [ ] Import `./app.css` to apply Tailwind styles
-  - [ ] Mount React root with `ReactDOM.createRoot(document.getElementById('root')!).render(...)`
+- [x] Task 8: Create `src/main.tsx` entry point (AC: 3, 6)
+  - [x] Import `queryClient` from `lib/query-client.ts`
+  - [x] Wrap app in `<QueryClientProvider client={queryClient}>` from `@tanstack/react-query`
+  - [x] Wrap app in `<RouterProvider router={router}>` from `react-router`
+  - [x] Import `./app.css` to apply Tailwind styles
+  - [x] Mount React root with `ReactDOM.createRoot(document.getElementById('root')!).render(...)`
 
-- [ ] Task 9: Create environment files (AC: 5)
-  - [ ] Create `frontend/.env.development` with `VITE_API_URL=http://localhost:3000`
-  - [ ] Create `frontend/.env.production` with `VITE_API_URL=https://api.yourdomain.com` (placeholder)
-  - [ ] Ensure `.env.development` and `.env.production` are NOT gitignored (they are committed — only `.env` and `.env.*local` are ignored)
+- [x] Task 9: Create environment files (AC: 5)
+  - [x] Create `frontend/.env.development` with `VITE_API_URL=http://localhost:3000`
+  - [x] Create `frontend/.env.production` with `VITE_API_URL=https://api.yourdomain.com` (placeholder)
+  - [x] Ensure `.env.development` and `.env.production` are NOT gitignored (they are committed — only `.env` and `.env.*local` are ignored)
 
-- [ ] Task 10: Create test setup (AC: 1)
-  - [ ] Create `frontend/tests/setup.ts` with `@testing-library/jest-dom` import
-  - [ ] Configure `vitest.config.ts` (or in `vite.config.ts`) with `environment: 'jsdom'` and `setupFiles: ['./tests/setup.ts']`
+- [x] Task 10: Create test setup (AC: 1)
+  - [x] Create `frontend/tests/setup.ts` with `@testing-library/jest-dom` import
+  - [x] Configure `vitest.config.ts` (or in `vite.config.ts`) with `environment: 'jsdom'` and `setupFiles: ['./tests/setup.ts']`
 
 ## Dev Notes
 
@@ -493,10 +493,49 @@ frontend/
 
 ### Agent Model Used
 
-{{agent_model_name_version}}
+claude-sonnet-4-5
 
 ### Debug Log References
 
+N/A
+
 ### Completion Notes List
 
+- Installed all required dependencies: Tailwind CSS V4, shadcn/ui Radix UI primitives, TanStack Query V5, React Router v7, Vitest, React Testing Library, Inter font, react/react-dom, vite, and TypeScript types.
+- Added `"type": "module"` and `"test": "vitest run"` script to `frontend/package.json`.
+- Created `vite.config.ts` with Tailwind V4 Vite plugin, React plugin, and Vitest jsdom config.
+- Created TypeScript config files (`tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json`).
+- Created `index.html` with root div and module script entry point.
+- Created `src/vite-env.d.ts` for `import.meta.env` TypeScript support.
+- Created `src/app.css` with Tailwind V4 CSS-first config and all 10 design tokens.
+- Created `src/lib/query-client.ts`, `src/lib/api-client.ts`, `src/lib/utils.ts`.
+- Created `src/types/index.ts` with `Todo` and `ApiError` interfaces.
+- Created `src/App.tsx` with `createBrowserRouter` routes for `/` and `/todos/:id`.
+- Created `src/main.tsx` entry point with `QueryClientProvider` and `RouterProvider`.
+- Created `frontend/.env.development` and `frontend/.env.production`.
+- Added gitignore exceptions for the env files so they are committed.
+- Created `frontend/tests/setup.ts` with jest-dom import.
+- Created `src/lib/utils.test.ts` as smoke test for the `cn()` utility.
+- Build passes (`tsc -b && vite build`) and tests pass (3/3).
+
 ### File List
+
+- `frontend/package.json` (updated)
+- `frontend/vite.config.ts` (new)
+- `frontend/tsconfig.json` (new)
+- `frontend/tsconfig.app.json` (new)
+- `frontend/tsconfig.node.json` (new)
+- `frontend/index.html` (new)
+- `frontend/.env.development` (new)
+- `frontend/.env.production` (new)
+- `frontend/src/vite-env.d.ts` (new)
+- `frontend/src/app.css` (new)
+- `frontend/src/App.tsx` (new)
+- `frontend/src/main.tsx` (new)
+- `frontend/src/lib/query-client.ts` (new)
+- `frontend/src/lib/api-client.ts` (new)
+- `frontend/src/lib/utils.ts` (new)
+- `frontend/src/lib/utils.test.ts` (new)
+- `frontend/src/types/index.ts` (new)
+- `frontend/tests/setup.ts` (new)
+- `.gitignore` (updated: added exceptions for frontend env files)
