@@ -43,8 +43,8 @@ development_status:
   # Epic 1: Project Foundation & Developer Environment
   epic-1: in-progress
   1-1-monorepo-root-workspace-setup: done
-  1-2-backend-project-initialisation-fastify-shell: ready-for-dev
-  1-3-prisma-schema-migration-database-connection: ready-for-dev
+  1-2-backend-project-initialisation-fastify-shell: done
+  1-3-prisma-schema-migration-database-connection: done
   1-4-frontend-shell-dependency-configuration: backlog
   epic-1-retrospective: optional
 
