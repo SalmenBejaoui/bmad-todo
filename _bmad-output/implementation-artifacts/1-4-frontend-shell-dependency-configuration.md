@@ -59,7 +59,7 @@ So that all visual and data-fetching foundations are in place for component deve
 
 - [x] Task 6: Create `src/types/index.ts` (AC: 3)
   - [x] Export `Todo` interface with all 9 fields matching the Prisma `Todo` model: `id`, `title`, `description`, `completed`, `userId`, `createdAt`, `doneAt`, `updatedAt`, `deletedAt`
-  - [x] All timestamp fields are `string | null` (ISO 8601 strings from API — never `Date` objects)
+  - [x] Timestamp fields `createdAt` and `updatedAt` are non-null `string` (always present); `doneAt` and `deletedAt` are `string | null` (ISO 8601 strings from API — never `Date` objects)
   - [x] Export `ApiError` interface matching what `api-client.ts` throws
 
 - [x] Task 7: Create `src/App.tsx` with route definitions (AC: 3, 6)
@@ -474,7 +474,7 @@ frontend/
 
 - Backend uses Prisma v7 with `prisma.config.ts` for database URL configuration (breaking change from v6)
 - The `Todo` model has exactly 9 fields: `id`, `title`, `description`, `completed`, `userId`, `createdAt`, `doneAt`, `updatedAt`, `deletedAt`
-- All timestamps are ISO 8601 strings in API responses — ensure `Todo` type uses `string | null` not `Date | null`
+- All timestamps in API responses are ISO 8601 strings (never `Date` objects). `createdAt` and `updatedAt` are non-null (`string`); `doneAt` and `deletedAt` are nullable (`string | null`)
 - Soft-delete is implemented — `deletedAt` field will always be `null` in responses from `GET /todos`
 
 ### References

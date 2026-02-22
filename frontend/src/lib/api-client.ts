@@ -24,13 +24,9 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const headers = new Headers(initHeaders ?? undefined)
   if (!headers.has('Content-Type')) {
     headers.set('Content-Type', 'application/json')
-  const headers = new Headers(initHeaders ?? undefined)
-  if (!headers.has('Content-Type')) {
-    headers.set('Content-Type', 'application/json')
   }
   const res = await fetch(`${BASE_URL}${path}`, {
     ...restInit,
-    headers,
     headers,
   })
   if (!res.ok) {
