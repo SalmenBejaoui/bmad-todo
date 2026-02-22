@@ -10,7 +10,7 @@ export interface Todo {
   deletedAt: string | null
 }
 
-export interface ApiError {
+export interface ApiErrorResponse {
   error: string
   code?: string
 }

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { apiClient, ApiError } from './api-client'
 
 const mockFetch = vi.fn()
@@ -6,6 +6,10 @@ const mockFetch = vi.fn()
 beforeEach(() => {
   vi.stubGlobal('fetch', mockFetch)
   mockFetch.mockReset()
+})
+
+afterEach(() => {
+  vi.unstubAllGlobals()
 })
 
 describe('ApiError', () => {
@@ -29,9 +33,7 @@ describe('apiClient', () => {
     )
     await apiClient.get('/todos')
     const [, init] = mockFetch.mock.calls[0] as [string, RequestInit]
-    expect((init.headers as Record<string, string>)['Content-Type']).toBe(
-      'application/json',
-    )
+    expect((init.headers as Headers).get('Content-Type')).toBe('application/json')
   })
 
   it('POST sends method, body, and Content-Type header', async () => {
@@ -42,9 +44,7 @@ describe('apiClient', () => {
     const [, init] = mockFetch.mock.calls[0] as [string, RequestInit]
     expect(init.method).toBe('POST')
     expect(init.body).toBe(JSON.stringify({ title: 'test' }))
-    expect((init.headers as Record<string, string>)['Content-Type']).toBe(
-      'application/json',
-    )
+    expect((init.headers as Headers).get('Content-Type')).toBe('application/json')
   })
 
   it('DELETE sends no body', async () => {

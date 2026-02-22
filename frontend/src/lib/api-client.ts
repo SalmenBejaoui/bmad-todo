@@ -1,4 +1,12 @@
-const BASE_URL = import.meta.env.VITE_API_URL as string
+const rawBaseUrl = import.meta.env.VITE_API_URL
+
+if (!rawBaseUrl) {
+  throw new Error(
+    'VITE_API_URL is not set. Please define it in your .env file to configure the API base URL.',
+  )
+}
+
+const BASE_URL: string = rawBaseUrl
 
 export class ApiError extends Error {
   constructor(
@@ -13,9 +21,13 @@ export class ApiError extends Error {
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const { headers: initHeaders, ...restInit } = init ?? {}
+  const headers = new Headers(initHeaders ?? undefined)
+  if (!headers.has('Content-Type')) {
+    headers.set('Content-Type', 'application/json')
+  }
   const res = await fetch(`${BASE_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json', ...initHeaders },
     ...restInit,
+    headers,
   })
   if (!res.ok) {
     const body = await res.json().catch(() => ({}))
