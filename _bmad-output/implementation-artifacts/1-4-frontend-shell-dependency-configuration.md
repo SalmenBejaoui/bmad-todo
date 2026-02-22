@@ -533,9 +533,49 @@ N/A
 - `frontend/src/App.tsx` (new)
 - `frontend/src/main.tsx` (new)
 - `frontend/src/lib/query-client.ts` (new)
-- `frontend/src/lib/api-client.ts` (new)
+- `frontend/src/lib/api-client.ts` (updated by review: fixed headers spread bug, typed BASE_URL, cleaner json return)
+- `frontend/src/lib/api-client.test.ts` (new: added by review)
 - `frontend/src/lib/utils.ts` (new)
 - `frontend/src/lib/utils.test.ts` (new)
 - `frontend/src/types/index.ts` (new)
 - `frontend/tests/setup.ts` (new)
+- `frontend/tsconfig.app.json` (updated by review: added tests/ to include, added vitest/globals types)
 - `.gitignore` (updated: added exceptions for frontend env files)
+
+### Senior Developer Review (AI)
+
+**Date:** 2026-02-22  
+**Reviewer:** AI Code Review Agent  
+**Outcome:** Changes Requested → Fixed Automatically
+
+#### Issues Found and Fixed
+
+**🔴 HIGH — Fixed**
+
+1. **`src/lib/api-client.ts:15-18` — `...init` spread overwrites merged `headers`**  
+   The original `request()` first built merged headers `{ 'Content-Type': ..., ...init?.headers }`, then spread the entire `init` object — which includes `init.headers` — overwriting the merged value. Any future caller passing custom headers would silently lose `Content-Type: application/json`.  
+   **Fix:** Destructure `headers` out of `init` before spreading: `const { headers: initHeaders, ...restInit } = init ?? {}`
+
+**🟡 MEDIUM — Fixed**
+
+2. **`src/lib/api-client.ts:1` — `BASE_URL` typed as `string | undefined`**  
+   `import.meta.env.VITE_API_URL` resolves to `string | undefined` by Vite's `ImportMetaEnv`. Used directly in a template literal would silently insert the string `"undefined"` if the env var is missing.  
+   **Fix:** Added `as string` assertion; aligns intent and avoids confusing runtime fetch errors.
+
+3. **`tsconfig.app.json` — `tests/` directory excluded from TypeScript coverage**  
+   `include: ["src"]` left `frontend/tests/setup.ts` (and any future test files outside `src/`) uncovered by the TypeScript compiler. Type errors in test infrastructure would go undetected.  
+   **Fix:** Changed to `include: ["src", "tests"]`.
+
+4. **`tsconfig.app.json` — missing `vitest/globals` type declaration**  
+   `vitest.config.ts` sets `globals: true`, but without `"types": ["vitest/globals"]` in tsconfig, TypeScript did not know about `describe`, `it`, `expect` as globals. Every test file must include explicit imports forever.  
+   **Fix:** Added `"types": ["vitest/globals"]` to `compilerOptions`.
+
+**🟢 LOW — Fixed**
+
+5. **`src/lib/api-client.ts:24` — `return res.json() as Promise<T>` double-promise style**  
+   Returning `res.json() as Promise<T>` from an `async` function is redundant (the async wrapper already wraps the return value in a promise) and relies on type assertion over promise unwrapping.  
+   **Fix:** Changed to `return (await res.json()) as T` — cleaner and more idiomatic.
+
+#### Additional Coverage Added
+
+- Created `src/lib/api-client.test.ts` with 8 tests covering: `ApiError` construction, GET/POST/DELETE header correctness, error throwing on non-2xx, error code extraction, and 204 No Content handling.
