@@ -1,6 +1,6 @@
 # Story 1.1: Monorepo Root Workspace Setup
 
-Status: ready-for-dev
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -24,28 +24,28 @@ So that I can manage the entire application from a single root with consistent c
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Create root `package.json` with npm workspaces and unified scripts (AC: 1, 2, 3)
-  - [ ] Set `"workspaces": ["frontend", "backend"]` to enable npm workspaces
-  - [ ] Add `dev` script: run `concurrently` to start both Vite (port 5173) and Fastify (port 3000)
-  - [ ] Add `test` script: delegate to `npm run test --workspaces --if-present`
-  - [ ] Add `test:e2e` script: run Playwright from `e2e/` directory
-  - [ ] Add `build` script: delegate to `npm run build --workspaces --if-present`
-  - [ ] Install `concurrently` as a root dev dependency
-- [ ] Task 2: Create `.env.example` at project root (AC: 4)
-  - [ ] Include `DATABASE_URL` with placeholder and comment (backend / Prisma)
-  - [ ] Include `PORT` with placeholder and comment (backend server port, default 3000)
-  - [ ] Include `ALLOWED_ORIGIN` with placeholder and comment (CORS origin for backend)
-  - [ ] Include `VITE_API_URL` with placeholder and comment (frontend API base URL)
-- [ ] Task 3: Create/update `.gitignore` at project root (AC: 5)
-  - [ ] Ensure `.env` (all variants) is ignored
-  - [ ] Ensure `node_modules/` is ignored (root and sub-packages)
-  - [ ] Ensure `dist/`, `frontend/dist/`, `backend/dist/` are ignored
-  - [ ] Ensure Prisma generated client files (`backend/node_modules/.prisma`, `backend/src/generated`) are ignored
-- [ ] Task 4: Create placeholder directory stubs for sub-packages (ARCH1)
-  - [ ] Create `frontend/` directory with minimal `package.json` if not already scaffolded
-  - [ ] Create `backend/` directory with minimal `package.json` if not already present
-  - [ ] Create `e2e/` directory stub at root
-- [ ] Task 5: Verify `npm install` from root installs all workspace dependencies (AC: 1)
+- [x] Task 1: Create root `package.json` with npm workspaces and unified scripts (AC: 1, 2, 3)
+  - [x] Set `"workspaces": ["frontend", "backend"]` to enable npm workspaces
+  - [x] Add `dev` script: run `concurrently` to start both Vite (port 5173) and Fastify (port 3000)
+  - [x] Add `test` script: delegate to `npm run test --workspaces --if-present`
+  - [x] Add `test:e2e` script: run Playwright from `e2e/` directory
+  - [x] Add `build` script: delegate to `npm run build --workspaces --if-present`
+  - [x] Install `concurrently` as a root dev dependency
+- [x] Task 2: Create `.env.example` at project root (AC: 4)
+  - [x] Include `DATABASE_URL` with placeholder and comment (backend / Prisma)
+  - [x] Include `PORT` with placeholder and comment (backend server port, default 3000)
+  - [x] Include `ALLOWED_ORIGIN` with placeholder and comment (CORS origin for backend)
+  - [x] Include `VITE_API_URL` with placeholder and comment (frontend API base URL)
+- [x] Task 3: Create/update `.gitignore` at project root (AC: 5)
+  - [x] Ensure `.env` (all variants) is ignored
+  - [x] Ensure `node_modules/` is ignored (root and sub-packages)
+  - [x] Ensure `dist/`, `frontend/dist/`, `backend/dist/` are ignored
+  - [x] Ensure Prisma generated client files (`backend/node_modules/.prisma`, `backend/src/generated`) are ignored
+- [x] Task 4: Create placeholder directory stubs for sub-packages (ARCH1)
+  - [x] Create `frontend/` directory with minimal `package.json` if not already scaffolded
+  - [x] Create `backend/` directory with minimal `package.json` if not already present
+  - [x] Create `e2e/` directory stub at root
+- [x] Task 5: Verify `npm install` from root installs all workspace dependencies (AC: 1)
 
 ## Dev Notes
 
@@ -170,10 +170,24 @@ bmad-todo/
 
 ### Agent Model Used
 
-BMad SM Agent (Bob) — story created 2026-02-22
-
-### Debug Log References
+BMad Dev Agent (Amelia) — story implemented 2026-02-22
 
 ### Completion Notes List
 
+- Created root `package.json` with npm workspaces (`frontend`, `backend`), unified scripts (`dev`, `test`, `test:e2e`, `build`), `concurrently` devDependency, and `engines.node >= 24`.
+- Created `frontend/package.json` stub with `name: "frontend"` and `dev`/`build` scripts.
+- Created `backend/package.json` stub with `name: "backend"` and placeholder `dev` script.
+- Created `e2e/` directory stub with `.gitkeep`.
+- Created `.env.example` with all required env vars (`DATABASE_URL`, `PORT`, `ALLOWED_ORIGIN`, `VITE_API_URL`) with comments.
+- Updated `.gitignore` to add `dist/`, `frontend/dist/`, `backend/dist/`, `backend/node_modules/.prisma/`, `backend/src/generated/`.
+- Verified `npm install` at root installs all workspace dependencies successfully (27 packages, 0 vulnerabilities).
+
 ### File List
+
+- `package.json` (created)
+- `package-lock.json` (generated)
+- `frontend/package.json` (created)
+- `backend/package.json` (created)
+- `e2e/.gitkeep` (created)
+- `.env.example` (created)
+- `.gitignore` (updated)
