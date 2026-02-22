@@ -374,7 +374,7 @@ createRoot(document.getElementById('root')!).render(
 **`vitest.config.ts` (or inline in `vite.config.ts` under `test:`):**
 ```ts
 // In vite.config.ts, add a test section:
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
