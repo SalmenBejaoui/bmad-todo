@@ -254,7 +254,7 @@ re-evaluation of quality, testing, and architectural impact.
 - Developer / DevOps Maintainer — deployment and operations
 
 **Must-Have Capabilities:**
-- Create a todo (text input, submit on enter or button press)
+- Create a todo (via modal or off-canvas panel: required title, optional short description)
 - View all todos (single list, active and completed visually distinguished)
 - Complete a todo (toggle, immediate optimistic UI update)
 - Delete a todo (permanent removal)
@@ -300,12 +300,26 @@ is the primary mitigation: any addition must be justified against the core produ
 
 ### Task Management
 
-- **FR1:** A user can create a new todo item by entering a text description and submitting
+- **FR1:** A user can create a new todo item by providing a required title and an optional short
+  description, submitted via a modal or off-canvas panel
 - **FR2:** A user can view the complete list of all their todo items
 - **FR3:** A user can mark a todo item as complete
 - **FR4:** A user can mark a completed todo item as incomplete (toggle back)
 - **FR5:** A user can delete a todo item permanently
-- **FR6:** The system stores each todo item with its text, completion status, and creation timestamp
+- **FR6:** The system stores each todo item with the following fields:
+  - **Title** (required): a short text label for the task
+  - **Description** (optional): a short free-text elaboration on the task
+  - **Completion status**: active or completed
+  - **Creation timestamp**: set once when the item is first created; never modified
+  - **Done timestamp**: set when the item is first marked complete; cleared if toggled back to active
+  - **Last-modified timestamp**: updated on every mutation (status change, description update)
+  - **Deletion timestamp**: recorded when the item is deleted (for audit/observability purposes)
+- **FR6a:** Task creation occurs in a modal or off-canvas panel that presents a title field
+  (required) and a description field (optional) before submission
+- **FR6b:** The task list displays only the task title for each item; full task details
+  (description and timestamps) are accessible by opening the individual task
+- **FR6c:** A user can open a task item to view all its details: title, description,
+  creation timestamp, done timestamp (if completed), and last-modified timestamp
 
 ### List Display & Visual State
 
@@ -340,9 +354,14 @@ is the primary mitigation: any addition must be justified against the core produ
 ### API Contract
 
 - **FR25:** The system exposes an endpoint to retrieve all todo items
-- **FR26:** The system exposes an endpoint to create a new todo item
-- **FR27:** The system exposes an endpoint to update the completion status of a todo item
-- **FR28:** The system exposes an endpoint to delete a todo item
+- **FR25a:** The system exposes an endpoint to retrieve a single todo item by ID (for the
+  task detail view)
+- **FR26:** The system exposes an endpoint to create a new todo item, accepting a required
+  title and an optional description
+- **FR27:** The system exposes an endpoint to update a todo item's completion status;
+  the server sets the done timestamp and last-modified timestamp accordingly
+- **FR28:** The system exposes an endpoint to delete a todo item; the server records
+  a deletion timestamp before removing or soft-deleting the record
 - **FR29:** All API endpoints return meaningful HTTP status codes for both success and failure responses
 - **FR30:** All API error responses include a descriptive message body
 
