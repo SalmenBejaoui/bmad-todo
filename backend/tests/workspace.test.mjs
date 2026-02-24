@@ -123,12 +123,12 @@ describe('.env.example', () => {
   it('contains placeholder values (no empty assignments)', () => {
     const lines = envContent
       .split('\n')
-      .filter(l => l.trim() && !l.startsWith('#'));
+      .filter(line => line.trim() && !line.startsWith('#'));
 
     for (const line of lines) {
-      const [, value] = line.split('=');
+      const parts = line.split('=');
       assert.ok(
-        value !== undefined && value.trim().length > 0,
+        parts.length >= 2 && parts[1] !== undefined && parts[1].trim().length > 0,
         `${line} must have a placeholder value`
       );
     }
