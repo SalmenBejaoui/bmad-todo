@@ -154,3 +154,16 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# ─── Project-specific ───────────────────────────────────────────────────────
+# Build outputs
+frontend/dist/
+backend/dist/
+
+# Prisma generated client
+backend/node_modules/.prisma/
+backend/src/generated/
+
+# OS
+.DS_Store
+*.swp
