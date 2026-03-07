@@ -2,10 +2,28 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
-    "test": "node --test 'tests/**/*.test.mjs'"
+    "dev": "tsx --env-file=.env.development watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "test": "vitest run"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^11.0.0",
+    "@fastify/sensible": "^6.0.0",
+    "fastify": "^5.0.0",
+    "fastify-plugin": "^5.0.0",
+    "fastify-type-provider-zod": "^4.0.0",
+    "zod": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^4.0.18"
+  }
 }

@@ -173,7 +173,7 @@ mkdir e2e
 - Zod — runtime request validation with TypeScript inference
 - Prisma (latest) — type-safe DB client, migration tooling, schema-first
 - `fastify.inject()` — route integration tests without port binding
-- Vitest — unit (service layer) + integration (route layer) tests
+- Vitest — unit (service layer) + integration (route layer) + workspace integrity tests
 
 **Fastify V5 Ecosystem — plugin version floor (Fastify V5 broke V4-era plugins):**
 
@@ -490,6 +490,8 @@ GET    /health         → health check
 **Test file location — Backend:**
 - Unit tests: `backend/tests/unit/` — test service and repository in isolation
 - Integration tests: `backend/tests/integration/` — test routes via `fastify.inject()`
+- Workspace integrity tests: `backend/tests/workspace.test.ts` — repo scaffold validation
+- Test runner: Vitest exclusively (all `.test.ts` files)
 - Filename mirrors source: `todo.service.test.ts`, `todo.routes.test.ts`
 
 **Test file location — Frontend:**
@@ -1033,7 +1035,7 @@ cd backend
 npm init -y
 npm install fastify @fastify/cors@^9 @fastify/sensible@^6 @fastify/type-provider-zod@^4
 npm install prisma @prisma/client zod pino
-npm install -D typescript vitest @types/node
+npm install -D typescript vitest @types/node tsx
 npx prisma init --datasource-provider postgresql
 # → define schema.prisma → npx prisma migrate dev --name init
 ```

@@ -56,3 +56,7 @@
 
 Type `/bmad-` in Copilot Chat to see all available BMAD workflows and agent activators. Agents are also available in the agents dropdown.
 <!-- BMAD:END -->
+
+## Test Instructions
+
+- After each code review, ALWAYS run the full test suite locally to ensure no regressions have been introduced. This is critical for maintaining code quality and catching issues early. This is appica
