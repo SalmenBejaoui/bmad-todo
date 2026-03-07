@@ -18,14 +18,14 @@ So that I can get the application running in any environment and diagnose operat
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Create root `README.md` (AC: #1 - #5)
-  - [ ] Project overview section
-  - [ ] Architecture summary section
-  - [ ] Prerequisites section
-  - [ ] Local development setup (step-by-step)
-  - [ ] Running tests section
-  - [ ] Production deployment via Docker Compose
-  - [ ] Environment variables reference
+- [x] Task 1: Create root `README.md` (AC: #1 - #5)
+  - [x] Project overview section
+  - [x] Architecture summary section
+  - [x] Prerequisites section
+  - [x] Local development setup (step-by-step)
+  - [x] Running tests section
+  - [x] Production deployment via Docker Compose
+  - [x] Environment variables reference
 
 ## Dev Notes
 

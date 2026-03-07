@@ -1,6 +1,6 @@
 # Story 3.2: Create Task via Modal
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 
@@ -26,53 +26,53 @@ so that I can capture tasks with zero friction and immediate feedback.
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Create `useCreateTodo` mutation hook (AC: #3, #4, #5)
-  - [ ] 1.1: Create `frontend/src/hooks/useCreateTodo.ts`
-  - [ ] 1.2: `useMutation` with `mutationFn: (data: { title: string; description?: string }) => apiClient.post<Todo>('/todos', data)`
-  - [ ] 1.3: `onMutate`: snapshot `queryClient.getQueryData(['todos'])`, optimistically prepend new todo to cache using `queryClient.setQueryData`, return `{ previousTodos, pendingTodo }`
-  - [ ] 1.4: Optimistic todo has temporary `id: 'pending-' + Date.now()`, `completed: false`, `createdAt: new Date().toISOString()`, all other fields null/default
-  - [ ] 1.5: `onError`: restore snapshot via `queryClient.setQueryData(['todos'], context.previousTodos)`, call `options.onError?.(err, vars, context)` to allow modal to reopen with preserved input
-  - [ ] 1.6: `onSettled`: `queryClient.invalidateQueries({ queryKey: ['todos'] })` to sync server state
-  - [ ] 1.7: Export `useCreateTodo(options?: { onError?: (err, vars, context) => void })` — accept callbacks so AddTaskModal can reopen on error
+- [x] Task 1: Create `useCreateTodo` mutation hook (AC: #3, #4, #5)
+  - [x] 1.1: Create `frontend/src/hooks/useCreateTodo.ts`
+  - [x] 1.2: `useMutation` with `mutationFn: (data: { title: string; description?: string }) => apiClient.post<Todo>('/todos', data)`
+  - [x] 1.3: `onMutate`: snapshot `queryClient.getQueryData(['todos'])`, optimistically prepend new todo to cache using `queryClient.setQueryData`, return `{ previousTodos, pendingTodo }`
+  - [x] 1.4: Optimistic todo has temporary `id: 'pending-' + Date.now()`, `completed: false`, `createdAt: new Date().toISOString()`, all other fields null/default
+  - [x] 1.5: `onError`: restore snapshot via `queryClient.setQueryData(['todos'], context.previousTodos)`, call `options.onError?.(err, vars, context)` to allow modal to reopen with preserved input
+  - [x] 1.6: `onSettled`: `queryClient.invalidateQueries({ queryKey: ['todos'] })` to sync server state
+  - [x] 1.7: Export `useCreateTodo(options?: { onError?: (err, vars, context) => void })` — accept callbacks so AddTaskModal can reopen on error
 
-- [ ] Task 2: Create `AddTaskModal` component (AC: #1, #2, #3, #5, #6)
-  - [ ] 2.1: Create `frontend/src/components/AddTaskModal.tsx`
-  - [ ] 2.2: Use `@radix-ui/react-dialog` for Dialog (desktop) — already installed
-  - [ ] 2.3: Detect viewport: use `window.matchMedia('(min-width: 768px)')` or a `useMediaQuery` hook to choose Dialog vs Sheet. For simplicity in MVP, use `@radix-ui/react-dialog` for both breakpoints (Sheet pattern deferred to Story 3.6 polish if needed)
-  - [ ] 2.4: Props: `open: boolean`, `onOpenChange: (open: boolean) => void`
-  - [ ] 2.5: Title `input` field: `autoFocus`, `required`, controlled with local `title` state
-  - [ ] 2.6: Description `textarea` field: optional, controlled with local `description` state
-  - [ ] 2.7: "Add task" button: disabled when `title.trim() === ''`
-  - [ ] 2.8: Submit on Enter key in title field when title non-empty (use `onKeyDown`)
-  - [ ] 2.9: On submit: call `mutate({ title: title.trim(), description: description.trim() || undefined })`, close modal immediately (set `onOpenChange(false)`)
-  - [ ] 2.10: On error callback from `useCreateTodo`: preserve `title` and `description` state, reopen modal (`onOpenChange(true)`), show Sonner toast "Couldn't save your task. Try again."
-  - [ ] 2.11: On close/Escape: reset `title` and `description` to `''` only if close was NOT triggered by an error
-  - [ ] 2.12: Import and use `toast` from `sonner` for error notification
+- [x] Task 2: Create `AddTaskModal` component (AC: #1, #2, #3, #5, #6)
+  - [x] 2.1: Create `frontend/src/components/AddTaskModal.tsx`
+  - [x] 2.2: Use `@radix-ui/react-dialog` for Dialog (desktop) — already installed
+  - [x] 2.3: Detect viewport: use `window.matchMedia('(min-width: 768px)')` or a `useMediaQuery` hook to choose Dialog vs Sheet. For simplicity in MVP, use `@radix-ui/react-dialog` for both breakpoints (Sheet pattern deferred to Story 3.6 polish if needed)
+  - [x] 2.4: Props: `open: boolean`, `onOpenChange: (open: boolean) => void`
+  - [x] 2.5: Title `input` field: `autoFocus`, `required`, controlled with local `title` state
+  - [x] 2.6: Description `textarea` field: optional, controlled with local `description` state
+  - [x] 2.7: "Add task" button: disabled when `title.trim() === ''`
+  - [x] 2.8: Submit on Enter key in title field when title non-empty (use `onKeyDown`)
+  - [x] 2.9: On submit: call `mutate({ title: title.trim(), description: description.trim() || undefined })`, close modal immediately (set `onOpenChange(false)`)
+  - [x] 2.10: On error callback from `useCreateTodo`: preserve `title` and `description` state, reopen modal (`onOpenChange(true)`), show Sonner toast "Couldn't save your task. Try again."
+  - [x] 2.11: On close/Escape: reset `title` and `description` to `''` only if close was NOT triggered by an error
+  - [x] 2.12: Import and use `toast` from `sonner` for error notification
 
-- [ ] Task 3: Install Sonner toast provider (AC: #5)
-  - [ ] 3.1: Sonner is already in `package.json` dependencies (`"sonner": "^2.0.7"`)
-  - [ ] 3.2: Add `<Toaster />` from `sonner` to `main.tsx` (or `App.tsx`) so toasts are globally rendered
-  - [ ] 3.3: Position: `position="bottom-right"` (desktop default)
+- [x] Task 3: Install Sonner toast provider (AC: #5)
+  - [x] 3.1: Sonner is already in `package.json` dependencies (`"sonner": "^2.0.7"`)
+  - [x] 3.2: Add `<Toaster />` from `sonner` to `main.tsx` (or `App.tsx`) so toasts are globally rendered
+  - [x] 3.3: Position: `position="bottom-right"` (desktop default)
 
-- [ ] Task 4: Wire `AppHeader` add-task callback to `AddTaskModal` in `App.tsx` (AC: #1)
-  - [ ] 4.1: Add `isAddModalOpen` state to `App.tsx` (useState)
-  - [ ] 4.2: Pass `onAddTask={() => setIsAddModalOpen(true)}` to `<AppHeader />`
-  - [ ] 4.3: Render `<AddTaskModal open={isAddModalOpen} onOpenChange={setIsAddModalOpen} />` in `App.tsx`
+- [x] Task 4: Wire `AppHeader` add-task callback to `AddTaskModal` in `App.tsx` (AC: #1)
+  - [x] 4.1: Add `isAddModalOpen` state to `App.tsx` (useState)
+  - [x] 4.2: Pass `onAddTask={() => setIsAddModalOpen(true)}` to `<AppHeader />`
+  - [x] 4.3: Render `<AddTaskModal open={isAddModalOpen} onOpenChange={setIsAddModalOpen} />` in `App.tsx`
 
-- [ ] Task 5: Write unit tests (AC: #7)
-  - [ ] 5.1: Create `frontend/src/components/AddTaskModal.test.tsx`
-  - [ ] 5.2: Test: "Add task" submit button is disabled when title is empty
-  - [ ] 5.3: Test: submitting with a title calls mutate with the title (mock `useCreateTodo`)
-  - [ ] 5.4: Test: submitting with title + description calls mutate with both values
-  - [ ] 5.5: Test: on error, modal stays/reopens with input values preserved, toast called
-  - [ ] 5.6: Create `frontend/src/hooks/useCreateTodo.test.ts`
-  - [ ] 5.7: Test: optimistic todo prepended to cache on `onMutate`
-  - [ ] 5.8: Test: cache rolled back on `onError`
-  - [ ] 5.9: Test: `invalidateQueries` called on `onSettled`
+- [x] Task 5: Write unit tests (AC: #7)
+  - [x] 5.1: Create `frontend/src/components/AddTaskModal.test.tsx`
+  - [x] 5.2: Test: "Add task" submit button is disabled when title is empty
+  - [x] 5.3: Test: submitting with a title calls mutate with the title (mock `useCreateTodo`)
+  - [x] 5.4: Test: submitting with title + description calls mutate with both values
+  - [x] 5.5: Test: on error, modal stays/reopens with input values preserved, toast called
+  - [x] 5.6: Create `frontend/src/hooks/useCreateTodo.test.ts`
+  - [x] 5.7: Test: optimistic todo prepended to cache on `onMutate`
+  - [x] 5.8: Test: cache rolled back on `onError`
+  - [x] 5.9: Test: `invalidateQueries` called on `onSettled`
 
-- [ ] Task 6: Run all tests and build
-  - [ ] 6.1: Run `cd frontend && npm test` — all tests pass (no regressions)
-  - [ ] 6.2: Run `cd frontend && npm run build` — no TypeScript errors
+- [x] Task 6: Run all tests and build
+  - [x] 6.1: Run `cd frontend && npm test` — all tests pass (no regressions)
+  - [x] 6.2: Run `cd frontend && npm run build` — no TypeScript errors
 
 ## Dev Notes
 

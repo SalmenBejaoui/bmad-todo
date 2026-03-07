@@ -18,25 +18,25 @@ So that I can deploy the complete application — frontend, backend, and databas
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Create `frontend/Dockerfile` (AC: #1)
-  - [ ] Stage 1 (build): Node 24 Alpine, copy package files, npm ci, npm run build
-  - [ ] Stage 2 (prod): nginx:alpine, copy built assets from stage 1, non-root user, expose 80 (nginx serves SPA)
-  - [ ] Add nginx.conf for SPA routing (try_files fallback)
+- [x] Task 1: Create `frontend/Dockerfile` (AC: #1)
+  - [x] Stage 1 (build): Node 24 Alpine, copy package files, npm ci, npm run build
+  - [x] Stage 2 (prod): nginx:alpine, copy built assets from stage 1, non-root user, expose 80 (nginx serves SPA)
+  - [x] Add nginx.conf for SPA routing (try_files fallback)
 
-- [ ] Task 2: Create `backend/Dockerfile` (AC: #1)
-  - [ ] Stage 1 (build): Node 24 Alpine, copy package files, npm ci, generate Prisma client, tsc build
-  - [ ] Stage 2 (prod): Node 24 Alpine slim, copy dist + node_modules, non-root user, expose 3000
+- [x] Task 2: Create `backend/Dockerfile` (AC: #1)
+  - [x] Stage 1 (build): Node 24 Alpine, copy package files, npm ci, generate Prisma client, tsc build
+  - [x] Stage 2 (prod): Node 24 Alpine slim, copy dist + node_modules, non-root user, expose 3000
 
-- [ ] Task 3: Create `docker-compose.yml` (AC: #2, #3)
-  - [ ] postgres service: postgres:16-alpine, named volume, healthcheck
-  - [ ] backend service: depends_on postgres (service_healthy), healthcheck on /health, env vars
-  - [ ] frontend service: depends_on backend (service_healthy), env vars
+- [x] Task 3: Create `docker-compose.yml` (AC: #2, #3)
+  - [x] postgres service: postgres:16-alpine, named volume, healthcheck
+  - [x] backend service: depends_on postgres (service_healthy), healthcheck on /health, env vars
+  - [x] frontend service: depends_on backend (service_healthy), env vars
 
-- [ ] Task 4: Create `docker-compose.test.yml` (AC: #4)
-  - [ ] postgres-test service: isolated database, separate port (5433), named volume
+- [x] Task 4: Create `docker-compose.test.yml` (AC: #4)
+  - [x] postgres-test service: isolated database, separate port (5433), named volume
 
-- [ ] Task 5: Verify/update `backend/package.json` pretest script (AC: #5)
-  - [ ] Confirm `db:migrate:test` or add `pretest` that runs prisma migrate deploy against .env.test
+- [x] Task 5: Verify/update `backend/package.json` pretest script (AC: #5)
+  - [x] Confirm `db:migrate:test` or add `pretest` that runs prisma migrate deploy against .env.test
 
 ## Dev Notes
 
