@@ -164,6 +164,12 @@ backend/dist/
 backend/node_modules/.prisma/
 backend/src/generated/
 
+# Playwright test results and reports
+test-results/
+playwright-report/
+e2e/test-results/
+e2e/playwright-report/
+
 # OS
 .DS_Store
 *.swp

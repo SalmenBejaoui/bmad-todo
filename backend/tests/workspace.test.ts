@@ -46,8 +46,8 @@ describe('Root package.json', () => {
     expect(pkg.private).toBe(true)
   })
 
-  it('declares workspaces ["frontend", "backend"]', () => {
-    expect(pkg.workspaces).toEqual(['frontend', 'backend'])
+  it('declares workspaces ["frontend", "backend", "e2e"]', () => {
+    expect(pkg.workspaces).toEqual(['frontend', 'backend', 'e2e'])
   })
 
   it('has "dev" script using concurrently', () => {

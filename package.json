@@ -1,7 +1,7 @@
 {
   "name": "bmad-todo",
   "private": true,
-  "workspaces": ["frontend", "backend"],
+  "workspaces": ["frontend", "backend", "e2e"],
   "scripts": {
     "dev": "concurrently \"npm -w frontend run dev\" \"npm -w backend run dev\"",
     "test": "npm -w backend test && npm -w frontend test",

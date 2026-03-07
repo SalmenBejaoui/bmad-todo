@@ -16,12 +16,9 @@ function createAdapter() {
 export default defineConfig({
   earlyAccess: true,
   schema: 'prisma/schema.prisma',
+  // Static reference required by `prisma migrate deploy`; empty string fallback for `prisma generate` (no DB needed)
   datasource: {
-    url: () => {
-      const url = process.env.DATABASE_URL
-      if (!url) throw new Error('DATABASE_URL environment variable is required')
-      return url
-    },
+    url: process.env.DATABASE_URL ?? '',
   },
   migrate: {
     adapter: createAdapter,
