@@ -49,6 +49,9 @@ describe('CORS', () => {
     })
 
     expect(response.statusCode).toBe(200)
-    expect(response.headers['access-control-allow-origin']).not.toBe('http://evil.com')
+    // The origin header must NOT echo back the disallowed origin
+    const allowOrigin = response.headers['access-control-allow-origin']
+    expect(allowOrigin).not.toBe('http://evil.com')
+    expect(allowOrigin).not.toBe('*')
   })
 })

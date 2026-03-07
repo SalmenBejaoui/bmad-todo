@@ -1,0 +1,28 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Todo model — all 9 fields exactly as specified in ARCH8–ARCH11
+// Soft-delete: deletedAt is set on delete; records are NEVER physically removed (ARCH9)
+// userId is nullable and always null in v1 — reserved for future auth (ARCH10)
+model Todo {
+  id          String    @id @default(uuid())
+  title       String
+  description String?
+  completed   Boolean   @default(false)
+  userId      String?
+  createdAt   DateTime  @default(now())
+  doneAt      DateTime?
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  @@map("todos")
+}
