@@ -147,4 +147,25 @@ describe('useToggleTodo', () => {
     await waitFor(() => expect(result.current.isError).toBe(true))
     expect(onError).toHaveBeenCalledOnce()
   })
+
+  it('invalidates the todos query on settled', async () => {
+    const updatedTodo = { ...baseTodo, completed: true, doneAt: new Date().toISOString() }
+    vi.mocked(apiClient.patch).mockResolvedValue(updatedTodo)
+    const { queryClient, wrapper } = makeWrapper()
+    queryClient.setQueryData<Todo[]>(['todos'], [baseTodo])
+    const invalidateSpy = vi.spyOn(queryClient, 'invalidateQueries')
+
+    const { result } = renderHook(() => useToggleTodo(), { wrapper })
+
+    await act(async () => {
+      result.current.mutate({ id: '1', completed: true })
+    })
+
+    await waitFor(() => expect(result.current.isSuccess).toBe(true))
+    expect(invalidateSpy).toHaveBeenCalledWith({ queryKey: ['todos'] })
+
+    await act(async () => {
+      await queryClient.cancelQueries()
+    })
+  })
 })

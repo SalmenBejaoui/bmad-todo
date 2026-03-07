@@ -123,4 +123,20 @@ describe('useCreateTodo', () => {
     await waitFor(() => expect(result.current.isError).toBe(true))
     expect(onError).toHaveBeenCalledOnce()
   })
+
+  it('invalidates the todos query on settled', async () => {
+    vi.mocked(apiClient.post).mockResolvedValue(mockTodo)
+    const { queryClient, wrapper } = makeWrapper()
+    queryClient.setQueryData<Todo[]>(['todos'], [])
+    const invalidateSpy = vi.spyOn(queryClient, 'invalidateQueries')
+
+    const { result } = renderHook(() => useCreateTodo(), { wrapper })
+
+    await act(async () => {
+      result.current.mutate({ title: 'Test task' })
+    })
+
+    await waitFor(() => expect(result.current.isSuccess).toBe(true))
+    expect(invalidateSpy).toHaveBeenCalledWith({ queryKey: ['todos'] })
+  })
 })

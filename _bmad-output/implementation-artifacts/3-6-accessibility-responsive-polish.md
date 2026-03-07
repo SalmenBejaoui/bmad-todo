@@ -1,6 +1,6 @@
 # Story 3-6: Accessibility & Responsive Polish
 
-## Status: in-progress
+## Status: done
 
 ## Story
 

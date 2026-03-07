@@ -1,4 +1,6 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { vi } from 'vitest'
 import { TaskRow } from './TaskRow'
 import type { Todo } from '../types/todo'
 
@@ -41,5 +43,33 @@ describe('TaskRow', () => {
   it('renders delete button with aria-label containing task title', () => {
     render(<ul><TaskRow todo={makeTodo({ title: 'My task' })} /></ul>)
     expect(screen.getByRole('button', { name: "Delete 'My task'" })).toBeInTheDocument()
+  })
+
+  it('fires onToggle with todo id when checkbox is clicked', async () => {
+    const onToggle = vi.fn()
+    render(<ul><TaskRow todo={makeTodo({ id: 'abc', title: 'Toggle test' })} onToggle={onToggle} /></ul>)
+    await userEvent.click(screen.getByRole('checkbox'))
+    expect(onToggle).toHaveBeenCalledWith('abc')
+  })
+
+  it('fires onClick with todo id when task body is clicked', async () => {
+    const onClick = vi.fn()
+    render(<ul><TaskRow todo={makeTodo({ id: 'xyz', title: 'Click test' })} onClick={onClick} /></ul>)
+    await userEvent.click(screen.getByText('Click test'))
+    expect(onClick).toHaveBeenCalledWith('xyz')
+  })
+
+  it('fires onDelete with todo id when delete button is clicked', async () => {
+    const onDelete = vi.fn()
+    render(<ul><TaskRow todo={makeTodo({ id: 'del1', title: 'Delete me' })} onDelete={onDelete} /></ul>)
+    await userEvent.click(screen.getByRole('button', { name: "Delete 'Delete me'" }))
+    expect(onDelete).toHaveBeenCalledWith('del1')
+  })
+
+  it('applies motion-safe transition classes on title', () => {
+    render(<ul><TaskRow todo={makeTodo({ title: 'Transition test' })} /></ul>)
+    const title = screen.getByText('Transition test')
+    expect(title.className).toContain('motion-safe:transition-all')
+    expect(title.className).toContain('motion-safe:duration-150')
   })
 })

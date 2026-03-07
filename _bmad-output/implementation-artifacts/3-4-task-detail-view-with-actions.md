@@ -1,6 +1,6 @@
 # Story 3-4: Task Detail View with Actions
 
-## Status: in-progress
+## Status: done
 
 ## Story
 

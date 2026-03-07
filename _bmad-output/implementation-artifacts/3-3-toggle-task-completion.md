@@ -1,6 +1,6 @@
 # Story 3-3: Toggle Task Completion
 
-## Status: in-progress
+## Status: done
 
 ## Story
 
