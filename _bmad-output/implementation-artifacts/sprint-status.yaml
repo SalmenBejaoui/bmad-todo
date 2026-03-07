@@ -49,12 +49,12 @@ development_status:
   epic-1-retrospective: optional
 
   # Epic 2: Core Task API
-  epic-2: backlog
-  2-1-todo-repository-service-layer: backlog
-  2-2-list-retrieve-todos-api: backlog
-  2-3-create-todo-api: backlog
-  2-4-toggle-todo-completion-api: backlog
-  2-5-delete-todo-api: backlog
+  epic-2: done
+  2-1-todo-repository-service-layer: done
+  2-2-list-retrieve-todos-api: done
+  2-3-create-todo-api: done
+  2-4-toggle-todo-completion-api: done
+  2-5-delete-todo-api: done
   epic-2-retrospective: optional
 
   # Epic 3: Core Task UI
