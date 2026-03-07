@@ -230,4 +230,17 @@ Claude Sonnet 4.6
 
 ### Completion Notes List
 
+- `useCreateTodo.ts` created with full TanStack Query v5 optimistic mutation pattern (cancelQueries → snapshot → prepend optimistic → onError rollback → onSettled invalidate)
+- `AddTaskModal.tsx` created with Radix UI Dialog, autoFocus title input, disabled submit when empty, Enter-key submit, error rollback with input preservation via `skipReset` ref
+- Sonner `<Toaster />` added to `App.tsx`
+- `App.tsx` wired with `isAddModalOpen` state, `AppHeader` onAddTask callback, and `AddTaskModal` rendered
+- 4 `useCreateTodo` tests + 10 `AddTaskModal` tests — all pass
+- All 45 frontend tests pass; build clean
+
 ### File List
+
+- `frontend/src/hooks/useCreateTodo.ts`
+- `frontend/src/hooks/useCreateTodo.test.ts`
+- `frontend/src/components/AddTaskModal.tsx`
+- `frontend/src/components/AddTaskModal.test.tsx`
+- `frontend/src/App.tsx` (updated)
