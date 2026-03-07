@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "concurrently \"npm -w frontend run dev\" \"npm -w backend run dev\"",
     "test": "npm -w backend test && npm -w frontend test",
-    "test:e2e": "npx playwright test --config=e2e/playwright.config.ts",
+    "test:e2e": "npm -w e2e test",
     "build": "npm -w frontend run build && npm -w backend run build"
   },
   "engines": {

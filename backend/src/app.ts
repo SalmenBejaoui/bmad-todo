@@ -26,6 +26,7 @@ export async function buildApp(opts: BuildAppOptions = {}) {
 
   await app.register(cors, {
     origin: process.env.ALLOWED_ORIGIN ?? 'http://localhost:5173',
+    methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'],
   })
   await app.register(sensible)
   await app.register(errorHandlerPlugin)

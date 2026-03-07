@@ -62,10 +62,9 @@ describe('Root package.json', () => {
     expect(pkg.scripts.test).toMatch(/backend/)
   })
 
-  it('has "test:e2e" script referencing Playwright and e2e/', () => {
+  it('has "test:e2e" script delegating to e2e workspace', () => {
     expect(pkg.scripts['test:e2e']).toBeTruthy()
-    expect(pkg.scripts['test:e2e']).toMatch(/playwright/)
-    expect(pkg.scripts['test:e2e']).toMatch(/e2e\//)
+    expect(pkg.scripts['test:e2e']).toMatch(/e2e/)
   })
 
   it('has "build" script delegating to both workspaces', () => {

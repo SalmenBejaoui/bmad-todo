@@ -23,7 +23,7 @@ test.describe('Task detail', () => {
     const taskButton = page
       .getByRole('listitem')
       .filter({ hasText: 'Plan the trip' })
-      .getByRole('button', { name: 'Plan the trip' })
+      .getByRole('button', { name: 'Plan the trip', exact: true })
     await taskButton.click()
 
     // Detail modal should open
@@ -59,7 +59,7 @@ test.describe('Task detail', () => {
     const taskButton = page
       .getByRole('listitem')
       .filter({ hasText: 'Review PR' })
-      .getByRole('button', { name: 'Review PR' })
+      .getByRole('button', { name: 'Review PR', exact: true })
     await taskButton.click()
 
     const modal = page.getByRole('dialog')
