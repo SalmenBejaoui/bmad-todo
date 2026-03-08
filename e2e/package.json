@@ -4,7 +4,8 @@
   "scripts": {
     "test": "playwright test",
     "test:headed": "playwright test --headed",
-    "install:browsers": "playwright install --with-deps chromium"
+    "install:browsers": "playwright install --with-deps chromium",
+    "screenshots:showcase": "node scripts/capture-showcase.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0"
