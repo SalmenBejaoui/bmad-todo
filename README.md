@@ -4,6 +4,12 @@ A full-stack task management application built with React, Fastify, PostgreSQL, 
 
 ---
 
+## Documentation
+
+Implementation-focused project documentation lives in [docs/index.md](./docs/index.md).
+
+---
+
 ## Architecture
 
 ```
